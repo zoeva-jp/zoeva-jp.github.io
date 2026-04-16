@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>ZŌEVΛ — Recovery Eye Mask Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Cinzel:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:     #0D1119;
+  --navy-mid: #12161F;
+  --gold:     #A08862;
+  --gold-l:   #B39878;
+  --white:    #E8E3D6;
+  --white-dim:rgba(232,227,214,0.5);
+  --serif:    'Cormorant Garamond', serif;
+  --cinzel:   'Cinzel', serif;
+  --sans:     'Montserrat', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--navy); color: var(--white); font-family: var(--sans); font-weight: 300; line-height: 1.8; overflow-x: hidden; }
+
+.fade { opacity: 0; transform: translateY(20px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.fade.in { opacity: 1; transform: translateY(0); }
+
+.hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 60px 32px 48px;
+  position: relative;
+  background: radial-gradient(ellipse at 50% 30%, rgba(160,136,98,0.07) 0%, transparent 65%);
+}
+.hero__eyebrow { font-family: var(--cinzel); font-size: 0.55rem; letter-spacing: 0.4em; color: rgba(160,136,98,0.6); margin-bottom: 24px; }
+.hero__logo { height: 28px; width: auto; mix-blend-mode: screen; margin-bottom: 20px; }
+.hero__product { font-family: var(--cinzel); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--white-dim); margin-bottom: 40px; }
+.hero__rule { width: 40px; height: 0.5px; background: var(--gold); margin: 0 auto 40px; opacity: 0.5; }
+.hero__copy { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; font-style: italic; line-height: 1.6; max-width: 320px; margin-bottom: 16px; }
+.hero__sub { font-size: 0.7rem; color: var(--white-dim); letter-spacing: 0.15em; }
+.hero__scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.hero__scroll span { font-family: var(--cinzel); font-size: 0.45rem; letter-spacing: 0.4em; color: rgba(160,136,98,0.4); }
+.hero__scroll::after { content: ''; display: block; width: 0.5px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollline 2s ease infinite; }
+@keyframes scrollline { 0% { opacity: 0; transform: scaleY(0); transform-origin: top; } 50% { opacity: 1; } 100% { opacity: 0; transform: scaleY(1); transform-origin: top; } }
+
+section { padding: 72px 28px; max-width: 480px; margin: 0 auto; }
+.section__label { font-family: var(--cinzel); font-size: 0.5rem; letter-spacing: 0.45em; color: var(--gold); margin-bottom: 20px; opacity: 0.7; }
+.section__title { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; line-height: 1.4; margin-bottom: 24px; }
+.section__body { font-size: 0.82rem; color: var(--white-dim); line-height: 2; margin-bottom: 16px; }
+.section__rule { width: 100%; height: 0.5px; background: linear-gradient(90deg, transparent, rgba(160,136,98,0.3), transparent); margin: 72px 0 0; }
+
+.quote { border-left: 1px solid rgba(160,136,98,0.3); padding: 16px 0 16px 20px; margin: 32px 0; }
+.quote__text { font-family: var(--serif); font-size: 1rem; font-style: italic; font-weight: 300; color: rgba(232,227,214,0.8); line-height: 1.8; margin-bottom: 10px; }
+.quote__author { font-family: var(--cinzel); font-size: 0.5rem; letter-spacing: 0.3em; color: var(--gold); opacity: 0.7; }
+
+/* DPS mechanism visual */
+.mechanism {
+  background: var(--navy-mid);
+  border: 0.5px solid rgba(160,136,98,0.15);
+  padding: 28px 24px;
+  margin: 32px 0;
+}
+.mechanism__item {
+  display: flex; gap: 16px; padding: 14px 0;
+  border-bottom: 0.5px solid rgba(232,227,214,0.05);
+}
+.mechanism__item:last-child { border-bottom: none; padding-bottom: 0; }
+.mechanism__item:first-child { padding-top: 0; }
+.mechanism__icon { width: 32px; flex-shrink: 0; padding-top: 2px; }
+.mechanism__icon span {
+  display: block; width: 24px; height: 24px;
+  border: 0.5px solid rgba(160,136,98,0.5);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--cinzel); font-size: 0.5rem; color: var(--gold);
+}
+.mechanism__body {}
+.mechanism__title { font-size: 0.8rem; color: var(--white); margin-bottom: 4px; font-weight: 400; }
+.mechanism__desc { font-size: 0.68rem; color: var(--white-dim); line-height: 1.8; }
+
+/* Protocol */
+.protocol { background: var(--navy-mid); border: 0.5px solid rgba(160,136,98,0.15); padding: 32px 24px; margin: 32px 0; position: relative; }
+.protocol__item { display: grid; grid-template-columns: 52px 1fr; gap: 0 16px; align-items: start; padding: 14px 0; border-bottom: 0.5px solid rgba(232,227,214,0.05); }
+.protocol__item:last-child { border-bottom: none; padding-bottom: 0; }
+.protocol__item:first-child { padding-top: 0; }
+.protocol__time { font-family: var(--cinzel); font-size: 0.65rem; color: var(--gold); letter-spacing: 0.05em; padding-top: 2px; }
+.protocol__action { font-size: 0.8rem; color: var(--white); font-weight: 400; margin-bottom: 3px; }
+.protocol__action.highlight { color: var(--gold); }
+.protocol__desc { font-size: 0.68rem; color: var(--white-dim); line-height: 1.7; }
+.protocol__badge { position: absolute; top: -1px; right: -1px; background: var(--gold); color: var(--navy); font-family: var(--cinzel); font-size: 0.4rem; letter-spacing: 0.2em; padding: 3px 8px; }
+
+/* Steps */
+.steps { margin: 32px 0; }
+.step { display: flex; gap: 20px; padding: 20px 0; border-bottom: 0.5px solid rgba(232,227,214,0.06); }
+.step:last-child { border-bottom: none; }
+.step__num { font-family: var(--cinzel); font-size: 1.4rem; color: rgba(160,136,98,0.3); line-height: 1; flex-shrink: 0; width: 32px; }
+.step__title { font-family: var(--serif); font-size: 1.05rem; color: var(--white); margin-bottom: 6px; }
+.step__desc { font-size: 0.75rem; color: var(--white-dim); line-height: 1.9; }
+
+/* Spec table */
+.spec { margin: 32px 0; border: 0.5px solid rgba(160,136,98,0.15); }
+.spec__row { display: grid; grid-template-columns: 100px 1fr; border-bottom: 0.5px solid rgba(232,227,214,0.05); }
+.spec__row:last-child { border-bottom: none; }
+.spec__key { font-family: var(--cinzel); font-size: 0.5rem; letter-spacing: 0.15em; color: rgba(160,136,98,0.6); padding: 14px 16px; background: rgba(160,136,98,0.04); display: flex; align-items: center; }
+.spec__val { font-size: 0.75rem; color: var(--white-dim); padding: 14px 16px; display: flex; align-items: center; }
+
+/* Results */
+.results { margin: 32px 0; }
+.result { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 0.5px solid rgba(232,227,214,0.06); }
+.result:last-child { border-bottom: none; }
+.result__week { font-family: var(--cinzel); font-size: 0.55rem; letter-spacing: 0.15em; color: var(--gold); flex-shrink: 0; width: 64px; padding-top: 3px; }
+.result__text { font-size: 0.78rem; color: var(--white-dim); line-height: 1.8; }
+
+/* Caution */
+.caution { background: rgba(160,136,98,0.05); border: 0.5px solid rgba(160,136,98,0.2); padding: 24px; margin: 32px 0; }
+.caution__title { font-family: var(--cinzel); font-size: 0.55rem; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 16px; opacity: 0.8; }
+.caution__item { font-size: 0.72rem; color: var(--white-dim); line-height: 1.9; padding-left: 12px; position: relative; margin-bottom: 6px; }
+.caution__item::before { content: '—'; position: absolute; left: 0; color: rgba(160,136,98,0.4); }
+
+/* FAQ */
+.faq { margin: 32px 0; }
+.faq__item { border-bottom: 0.5px solid rgba(232,227,214,0.07); overflow: hidden; }
+.faq__q { width: 100%; background: none; border: none; color: var(--white); font-family: var(--serif); font-size: 0.95rem; font-weight: 300; text-align: left; padding: 20px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq__q::after { content: '+'; font-family: var(--cinzel); font-size: 1rem; color: var(--gold); flex-shrink: 0; transition: transform 0.3s ease; }
+.faq__item.open .faq__q::after { transform: rotate(45deg); }
+.faq__a { font-size: 0.75rem; color: var(--white-dim); line-height: 2; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+.faq__item.open .faq__a { max-height: 200px; padding-bottom: 20px; }
+
+/* CTA */
+.cta-section { text-align: center; padding: 80px 28px; background: radial-gradient(ellipse at 50% 0%, rgba(160,136,98,0.08) 0%, transparent 60%); }
+.cta__label { font-family: var(--cinzel); font-size: 0.5rem; letter-spacing: 0.45em; color: var(--gold); opacity: 0.6; margin-bottom: 20px; }
+.cta__title { font-family: var(--serif); font-size: 1.5rem; font-style: italic; font-weight: 300; color: var(--white); margin-bottom: 32px; line-height: 1.5; }
+.cta__btn { display: inline-block; border: 0.5px solid var(--gold); color: var(--gold); font-family: var(--cinzel); font-size: 0.6rem; letter-spacing: 0.3em; padding: 14px 32px; text-decoration: none; transition: background 0.3s ease, color 0.3s ease; margin-bottom: 40px; }
+.cta__btn:hover { background: var(--gold); color: var(--navy); }
+.cta__next { font-size: 0.65rem; color: var(--white-dim); margin-bottom: 16px; letter-spacing: 0.1em; }
+.cta__next-link { display: inline-block; color: var(--gold); font-family: var(--cinzel); font-size: 0.55rem; letter-spacing: 0.2em; text-decoration: none; border-bottom: 0.5px solid rgba(160,136,98,0.3); padding-bottom: 2px; }
+
+footer { text-align: center; padding: 40px 28px; border-top: 0.5px solid rgba(232,227,214,0.06); }
+footer img { height: 18px; mix-blend-mode: screen; opacity: 0.5; margin-bottom: 16px; display: block; margin-left: auto; margin-right: auto; }
+footer p { font-size: 0.58rem; color: rgba(232,227,214,0.25); line-height: 2; letter-spacing: 0.08em; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero__eyebrow fade">Recovery Guide</p>
+  <img src="logo.png" alt="ZŌEVΛ" class="hero__logo fade">
+  <p class="hero__product fade">Recovery Eye Mask</p>
+  <div class="hero__rule fade"></div>
+  <h1 class="hero__copy fade">完全な暗闇の中で、<br>深い回復が始まります。</h1>
+  <p class="hero__sub fade">Aging is a design variable.</p>
+  <div class="hero__scroll"><span>SCROLL</span></div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- SCIENCE -->
+<section>
+  <p class="section__label fade">01 — Science</p>
+  <h2 class="section__title fade">完全遮光と深圧刺激。<br>2つの科学が重なる。</h2>
+  <p class="section__body fade">現代の寝室は、完全な暗闇ではありません。街灯、電子機器のインジケーター、早朝の光——これらすべてが、あなたの概日リズムに干渉し続けています。</p>
+  <p class="section__body fade">ZŌEVΛアイマスクは「完全遮光」と「深圧刺激（DPS）」を組み合わせることで、副交感神経を優位にし、入眠を科学的に加速します。</p>
+
+  <div class="mechanism fade">
+    <div class="mechanism__item">
+      <div class="mechanism__icon"><span>遮</span></div>
+      <div class="mechanism__body">
+        <div class="mechanism__title">完全遮光（＜0.1 lux）</div>
+        <div class="mechanism__desc">光量0.1 lux以下の完全遮光設計。脳が「夜」を正確に認識できる環境を作り、メラトニン分泌を最大化します。</div>
+      </div>
+    </div>
+    <div class="mechanism__item">
+      <div class="mechanism__icon"><span>圧</span></div>
+      <div class="mechanism__body">
+        <div class="mechanism__title">深圧刺激（270g）</div>
+        <div class="mechanism__desc">ウェイテッドブランケットで実証された深圧刺激を目元に応用。皮膚の感覚受容器を穏やかに刺激し、副交感神経を活性化。心拍数の低下とコルチゾールの抑制を助けます。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote fade">
+    <p class="quote__text">"The circadian rhythm governs insulin sensitivity, immune function, and cardiovascular recovery. Disrupting it with light has systemic consequences."</p>
+    <p class="quote__author">Roger Seheult, MD — MedCram · Pulmonologist</p>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- PROTOCOL -->
+<section>
+  <p class="section__label fade">02 — Protocol</p>
+  <h2 class="section__title fade">ZŌEVΛスリープ<br>プロトコル</h2>
+  <p class="section__body fade">アイマスクは就寝30分前からの装着を推奨します。グラスと組み合わせることで、より深い回復が得られます。</p>
+
+  <div class="protocol fade">
+    <div class="protocol__badge">推奨タイムライン</div>
+    <div class="protocol__item">
+      <div class="protocol__time">4h前</div>
+      <div class="protocol__content">
+        <div class="protocol__action">食事を終える</div>
+        <div class="protocol__desc">消化活動による深部体温上昇を避けます。</div>
+      </div>
+    </div>
+    <div class="protocol__item">
+      <div class="protocol__time">3h前</div>
+      <div class="protocol__content">
+        <div class="protocol__action">照明を暖色に落とす</div>
+        <div class="protocol__desc">メラトニン分泌の準備を段階的に開始します。</div>
+      </div>
+    </div>
+    <div class="protocol__item">
+      <div class="protocol__time">2h前</div>
+      <div class="protocol__content">
+        <div class="protocol__action">ZŌEVΛグラスを装着・水分を控える</div>
+        <div class="protocol__desc">ブルーライトを遮断し、中途覚醒を防ぎます。</div>
+      </div>
+    </div>
+    <div class="protocol__item">
+      <div class="protocol__time">1h前</div>
+      <div class="protocol__content">
+        <div class="protocol__action">デジタルデトックス</div>
+        <div class="protocol__desc">思考の興奮を静め、入眠への移行を準備します。</div>
+      </div>
+    </div>
+    <div class="protocol__item">
+      <div class="protocol__time">30分前</div>
+      <div class="protocol__content">
+        <div class="protocol__action highlight">ZŌEVΛアイマスクを装着</div>
+        <div class="protocol__desc">深圧刺激が副交感神経を優位にします。横になる前に装着することで入眠までの時間を短縮します。</div>
+      </div>
+    </div>
+    <div class="protocol__item">
+      <div class="protocol__time">就寝</div>
+      <div class="protocol__content">
+        <div class="protocol__action">そのまま睡眠</div>
+        <div class="protocol__desc">アイマスクは装着したまま就寝してください。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- HOW TO USE -->
+<section>
+  <p class="section__label fade">03 — How to Use</p>
+  <h2 class="section__title fade">正しい装着方法</h2>
+
+  <div class="steps fade">
+    <div class="step">
+      <div class="step__num">1</div>
+      <div class="step__body">
+        <div class="step__title">ストラップを調整する</div>
+        <div class="step__desc">「軽く触れている」程度が適切です。きつすぎると側頭部に圧迫感が出ます。頭囲52〜62cmに対応しています。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__num">2</div>
+      <div class="step__body">
+        <div class="step__title">目元に当てて固定する</div>
+        <div class="step__desc">マスク下部を鼻の上部に沿わせ、光漏れがないことを確認してください。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__num">3</div>
+      <div class="step__body">
+        <div class="step__title">仰向けで就寝する</div>
+        <div class="step__desc">深圧刺激の効果を最大化するため、仰向けでの使用を推奨します。うつ伏せ・横向きでは重量が均等に分散されません。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- SPEC -->
+<section>
+  <p class="section__label fade">04 — Specifications</p>
+  <h2 class="section__title fade">製品仕様</h2>
+
+  <div class="spec fade">
+    <div class="spec__row"><div class="spec__key">素材</div><div class="spec__val">ニットベルベット</div></div>
+    <div class="spec__row"><div class="spec__key">重量</div><div class="spec__val">270g</div></div>
+    <div class="spec__row"><div class="spec__key">遮光性</div><div class="spec__val">完全遮光（＜0.1 lux）</div></div>
+    <div class="spec__row"><div class="spec__key">サイズ</div><div class="spec__val">全長80cm × 幅15cm</div></div>
+    <div class="spec__row"><div class="spec__key">ストラップ</div><div class="spec__val">弾性ゴム（頭囲52〜62cm対応）</div></div>
+    <div class="spec__row"><div class="spec__key">対象</div><div class="spec__val">男女兼用</div></div>
+    <div class="spec__row"><div class="spec__key">洗濯</div><div class="spec__val">手洗いのみ（30℃以下）</div></div>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- RESULTS -->
+<section>
+  <p class="section__label fade">05 — Results</p>
+  <h2 class="section__title fade">効果の目安</h2>
+
+  <div class="results fade">
+    <div class="result">
+      <div class="result__week">Week 1</div>
+      <div class="result__text">入眠までの時間が短縮される。深圧刺激による副交感神経の活性化が始まる。</div>
+    </div>
+    <div class="result">
+      <div class="result__week">Week 3</div>
+      <div class="result__text">朝の目覚めの質・回復感が向上する。中途覚醒の減少を感じ始める。</div>
+    </div>
+    <div class="result">
+      <div class="result__week">Week 6</div>
+      <div class="result__text">HRV・安静時心拍数に変化が現れる（計測している方）。概日リズムの安定が数値で確認できる。</div>
+    </div>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- CAUTION -->
+<section>
+  <p class="section__label fade">06 — Caution</p>
+  <h2 class="section__title fade">ご使用上の注意</h2>
+
+  <div class="caution fade">
+    <div class="caution__title">重要事項</div>
+    <div class="caution__item">緑内障・高眼圧症の方は、必ずご使用前に眼科医にご相談ください（重みが眼圧に影響する場合があります）</div>
+    <div class="caution__item">眼疾患・目の手術後の方はご使用をお控えください</div>
+    <div class="caution__item">就寝中にずれた場合は、無理に直さず取り外してください</div>
+    <div class="caution__item">6歳以下のお子様には使用させないでください</div>
+    <div class="caution__item">異常を感じた場合はすぐに使用を中止し、医療機関にご相談ください</div>
+    <div class="caution__item">本製品は医療機器ではありません</div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq fade" style="margin-top:48px;">
+    <div class="faq__item">
+      <button class="faq__q">うつ伏せや横向きで使えますか？</button>
+      <div class="faq__a">深圧刺激の効果を最大化するため仰向けを推奨します。横向きでも使用はできますが、重量が均等に分散されないため効果が限定的になります。</div>
+    </div>
+    <div class="faq__item">
+      <button class="faq__q">グラスと一緒に使う必要がありますか？</button>
+      <div class="faq__a">アイマスク単体でも有効です。完全遮光と深圧刺激は、ブルーライト遮断とは独立して作用します。ただし、グラスと組み合わせることでより深い回復が得られます。</div>
+    </div>
+    <div class="faq__item">
+      <button class="faq__q">お手入れ方法は？</button>
+      <div class="faq__a">手洗いのみ対応です（水温30℃以下・中性洗剤）。洗濯機・乾燥機はご使用できません。洗濯後は形を整え、陰干しをしてください。直射日光での乾燥は変色の原因となります。</div>
+    </div>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="cta__label fade">Next Step</p>
+  <h2 class="cta__title fade">回復をさらに深める。<br>次の一手。</h2>
+  <a href="https://zoeva.jp" class="cta__btn fade">SHOP ZŌEVΛ</a>
+
+  <p class="cta__next fade">グラスと組み合わせる</p>
+  <a href="glass-guide.html" class="cta__next-link fade">Blue Light Recovery Glass Guide →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="logo.png" alt="ZŌEVΛ">
+  <p>Based on research by Roger Seheult MD (MedCram) · Matthew Walker PhD (UC Berkeley)<br>David Sinclair PhD (Harvard) · Peter Attia MD (Early Medical)<br><br>本製品は医療機器ではありません。</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+document.querySelectorAll('.faq__q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq__item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
