@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>ZŌEVΛ — Recovery Sunglasses Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Cinzel:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:     #0D1119;
+  --navy-mid: #12161F;
+  --gold:     #A08862;
+  --gold-l:   #B39878;
+  --gold-dim: rgba(160,136,98,0.15);
+  --white:    #E8E3D6;
+  --white-dim:rgba(232,227,214,0.5);
+  --serif:    'Cormorant Garamond', serif;
+  --cinzel:   'Cinzel', serif;
+  --sans:     'Montserrat', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ── Fade in ── */
+.fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.fade.in { opacity: 1; transform: translateY(0); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 32px 48px;
+  position: relative;
+  background: radial-gradient(ellipse at 50% 30%, rgba(160,136,98,0.07) 0%, transparent 65%);
+}
+
+.hero__eyebrow {
+  font-family: var(--cinzel);
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  color: rgba(160,136,98,0.6);
+  margin-bottom: 24px;
+}
+
+.hero__logo {
+  height: 28px;
+  width: auto;
+  mix-blend-mode: screen;
+  margin-bottom: 20px;
+}
+
+.hero__product {
+  font-family: var(--cinzel);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--white-dim);
+  margin-bottom: 40px;
+}
+
+.hero__rule {
+  width: 40px;
+  height: 0.5px;
+  background: var(--gold);
+  margin: 0 auto 40px;
+  opacity: 0.5;
+}
+
+.hero__copy {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--white);
+  max-width: 320px;
+  margin-bottom: 16px;
+}
+
+.hero__sub {
+  font-size: 0.7rem;
+  color: var(--white-dim);
+  letter-spacing: 0.15em;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.hero__scroll span {
+  font-family: var(--cinzel);
+  font-size: 0.45rem;
+  letter-spacing: 0.4em;
+  color: rgba(160,136,98,0.4);
+}
+.hero__scroll::after {
+  content: '';
+  display: block;
+  width: 0.5px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollline 2s ease infinite;
+}
+@keyframes scrollline {
+  0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: scaleY(1); transform-origin: top; }
+}
+
+/* ── SECTION BASE ── */
+section {
+  padding: 72px 28px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.section__label {
+  font-family: var(--cinzel);
+  font-size: 0.5rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.section__title {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.section__body {
+  font-size: 0.82rem;
+  color: var(--white-dim);
+  line-height: 2;
+  margin-bottom: 16px;
+}
+
+.section__rule {
+  width: 100%;
+  height: 0.5px;
+  background: linear-gradient(90deg, transparent, rgba(160,136,98,0.3), transparent);
+  margin: 72px 0 0;
+}
+
+/* ── QUOTE ── */
+.quote {
+  border-left: 1px solid rgba(160,136,98,0.3);
+  padding: 16px 0 16px 20px;
+  margin: 32px 0;
+}
+.quote__text {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(232,227,214,0.8);
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+.quote__author {
+  font-family: var(--cinzel);
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+/* ── PROTOCOL ── */
+.protocol {
+  background: var(--navy-mid);
+  border: 0.5px solid rgba(160,136,98,0.15);
+  padding: 32px 24px;
+  margin: 32px 0;
+  position: relative;
+}
+
+.protocol__item {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 0 16px;
+  align-items: start;
+  padding: 14px 0;
+  border-bottom: 0.5px solid rgba(232,227,214,0.05);
+  position: relative;
+}
+.protocol__item:last-child { border-bottom: none; padding-bottom: 0; }
+.protocol__item:first-child { padding-top: 0; }
+
+.protocol__time {
+  font-family: var(--cinzel);
+  font-size: 0.65rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  padding-top: 2px;
+}
+
+.protocol__content {}
+.protocol__action {
+  font-size: 0.8rem;
+  color: var(--white);
+  font-weight: 400;
+  margin-bottom: 3px;
+}
+.protocol__action.highlight {
+  color: var(--gold);
+  font-weight: 400;
+}
+.protocol__desc {
+  font-size: 0.68rem;
+  color: var(--white-dim);
+  line-height: 1.7;
+}
+
+.protocol__badge {
+  position: absolute;
+  top: -1px; right: -1px;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--cinzel);
+  font-size: 0.4rem;
+  letter-spacing: 0.2em;
+  padding: 3px 8px;
+}
+
+/* ── STEPS ── */
+.steps { margin: 32px 0; }
+.step {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 0.5px solid rgba(232,227,214,0.06);
+}
+.step:last-child { border-bottom: none; }
+.step__num {
+  font-family: var(--cinzel);
+  font-size: 1.4rem;
+  color: rgba(160,136,98,0.3);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 32px;
+}
+.step__body {}
+.step__title {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.step__desc {
+  font-size: 0.75rem;
+  color: var(--white-dim);
+  line-height: 1.9;
+}
+
+/* ── RESULTS ── */
+.results { margin: 32px 0; }
+.result {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 0.5px solid rgba(232,227,214,0.06);
+}
+.result:last-child { border-bottom: none; }
+.result__week {
+  font-family: var(--cinzel);
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  flex-shrink: 0;
+  width: 64px;
+  padding-top: 3px;
+}
+.result__text {
+  font-size: 0.78rem;
+  color: var(--white-dim);
+  line-height: 1.8;
+}
+
+/* ── FAQ ── */
+.faq { margin: 32px 0; }
+.faq__item {
+  border-bottom: 0.5px solid rgba(232,227,214,0.07);
+  overflow: hidden;
+}
+.faq__q {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 300;
+  text-align: left;
+  padding: 20px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.faq__q::after {
+  content: '+';
+  font-family: var(--cinzel);
+  font-size: 1rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+.faq__item.open .faq__q::after { transform: rotate(45deg); }
+.faq__a {
+  font-size: 0.75rem;
+  color: var(--white-dim);
+  line-height: 2;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.faq__item.open .faq__a {
+  max-height: 200px;
+  padding-bottom: 20px;
+}
+
+/* ── CTA ── */
+.cta-section {
+  text-align: center;
+  padding: 80px 28px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(160,136,98,0.08) 0%, transparent 60%);
+}
+.cta__label {
+  font-family: var(--cinzel);
+  font-size: 0.5rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+.cta__title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+.cta__btn {
+  display: inline-block;
+  border: 0.5px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--cinzel);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  padding: 14px 32px;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  margin-bottom: 40px;
+}
+.cta__btn:hover { background: var(--gold); color: var(--navy); }
+
+.cta__next {
+  font-size: 0.65rem;
+  color: var(--white-dim);
+  margin-bottom: 16px;
+  letter-spacing: 0.1em;
+}
+.cta__next-link {
+  display: inline-block;
+  color: var(--gold);
+  font-family: var(--cinzel);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  border-bottom: 0.5px solid rgba(160,136,98,0.3);
+  padding-bottom: 2px;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 40px 28px;
+  border-top: 0.5px solid rgba(232,227,214,0.06);
+}
+footer img { height: 18px; mix-blend-mode: screen; opacity: 0.5; margin-bottom: 16px; }
+footer p {
+  font-size: 0.58rem;
+  color: rgba(232,227,214,0.25);
+  line-height: 2;
+  letter-spacing: 0.08em;
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero__eyebrow fade">Recovery Guide</p>
+  <img src="logo.png" alt="ZŌEVΛ" class="hero__logo fade">
+  <p class="hero__product fade">Recovery Sunglasses</p>
+  <div class="hero__rule fade"></div>
+  <h1 class="hero__copy fade">光から守り、<br>老化率を下げる。</h1>
+  <p class="hero__sub fade">Aging is a design variable.</p>
+  <div class="hero__scroll"><span>SCROLL</span></div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- WHY -->
+<section>
+  <p class="section__label fade">01 — Science</p>
+  <h2 class="section__title fade">なぜ、紫外線が<br>老化を加速するのか。</h2>
+  <p class="section__body fade">紫外線（UV-A・UV-B）は皮膚の真皮層に達し、コラーゲン・エラスチンを分解します。細胞のDNAに直接損傷を与え、酸化ストレスを蓄積させることで、老化率を1.0以上に押し上げます。</p>
+  <p class="section__body fade">目への紫外線ダメージも見過ごせません。網膜・水晶体への蓄積ダメージは可逆性がなく、白内障・黄斑変性リスクを高めます。適切な遮光が、眼の長期的な健康を守ります。</p>
+
+  <div class="quote fade">
+    <p class="quote__text">"Ultraviolet radiation is the primary environmental cause of skin aging. UV-A penetrates deep into the dermis, generating reactive oxygen species that degrade collagen and accelerate cellular senescence."</p>
+    <p class="quote__author">David Sinclair, PhD — Harvard Medical School · Author of Lifespan</p>
+  </div>
+
+  <div class="quote fade">
+    <p class="quote__text">"Cumulative UV exposure to the lens and retina is irreversible. Quality UV protection is not cosmetic — it is a fundamental investment in long-term ocular health and cognitive function."</p>
+    <p class="quote__author">Peter Attia, MD — Early Medical · Longevity Physician</p>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- PROTOCOL -->
+<section>
+  <p class="section__label fade">02 — Protocol</p>
+  <h2 class="section__title fade">ZŌEVΛアウトドア<br>プロトコル</h2>
+  <p class="section__body fade">紫外線への対策は、暴露の前から始まります。反応してからでは遅い。先手の習慣が、老化率を変えます。</p>
+
+  <div class="protocol fade">
+    <div class="protocol__badge">推奨タイムライン</div>
+    <div class="protocol__item">
+      <div class="protocol__time">外出前</div>
+      <div class="protocol__content">
+        <div class="protocol__action highlight">ZŌEVΛサングラスを装着</div>
+        <div class="protocol__desc">外に出る前に装着してください。紫外線ダメージは屋外に出た瞬間から始まります。</div>
+      </div>
+    </div>
+    <div class="protocol__item">
+      <div class="protocol__time">日中</div>
+      <div class="protocol__content">
+        <div class="protocol__action">曇りでも装着を継続</div>
+        <div class="protocol__desc">雲は紫外線をほとんど遮りません。曇天・日陰でも80%以上のUVが透過します。</div>
+      </div>
+    </div>
+    <div class="protocol__item">
+      <div class="protocol__time">ドライブ</div>
+      <div class="protocol__content">
+        <div class="protocol__action">車内でも装着する</div>
+        <div class="protocol__desc">フロントガラスはUV-Bを遮断しますが、UV-Aは透過します。長時間のドライブでは特に注意が必要です。</div>
+      </div>
+    </div>
+    <div class="protocol__item">
+      <div class="protocol__time">帰宅後</div>
+      <div class="protocol__content">
+        <div class="protocol__action">レンズを拭いて保管</div>
+        <div class="protocol__desc">付属クロスで軽く拭き取り、ケースに収納してください。コーティングの寿命を保ちます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- HOW TO USE -->
+<section>
+  <p class="section__label fade">03 — How to Use</p>
+  <h2 class="section__title fade">使い方は、<br>3ステップだけ。</h2>
+
+  <div class="steps fade">
+    <div class="step">
+      <div class="step__num">1</div>
+      <div class="step__body">
+        <div class="step__title">外出前に装着する</div>
+        <div class="step__desc">タイミングが全てです。紫外線は外に出た瞬間から蓄積します。玄関を出る前に装着する習慣をつけてください。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__num">2</div>
+      <div class="step__body">
+        <div class="step__title">そのまま一日を過ごす</div>
+        <div class="step__desc">歩行・ドライブ・屋外活動——全ての場面で装着を継続してください。レンズが紫外線・ブルーライトを遮断します。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__num">3</div>
+      <div class="step__body">
+        <div class="step__title">帰宅後はクロスで拭く</div>
+        <div class="step__desc">付属のマイクロファイバークロスで軽く拭き取ってください。コーティングを傷めず、レンズを長期間清潔に保ちます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- RESULTS -->
+<section>
+  <p class="section__label fade">04 — Results</p>
+  <h2 class="section__title fade">継続使用による<br>変化の目安</h2>
+  <p class="section__body fade">紫外線ダメージは蓄積型です。防ぐことの効果は、続けた年数の分だけ現れます。</p>
+
+  <div class="results fade">
+    <div class="result">
+      <div class="result__week">1ヶ月</div>
+      <div class="result__text">目の疲労感・かすみの軽減が始まる。強い光への眩しさが和らぐ傾向。</div>
+    </div>
+    <div class="result">
+      <div class="result__week">3ヶ月</div>
+      <div class="result__text">屋外での集中力・視認性が安定する。肌の光老化の進行が緩やかになる。</div>
+    </div>
+    <div class="result">
+      <div class="result__week">長期</div>
+      <div class="result__text">累積UVダメージの抑制。白内障・黄斑変性リスクの低減。老化率の維持・改善。</div>
+    </div>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- FAQ -->
+<section>
+  <p class="section__label fade">05 — FAQ</p>
+  <h2 class="section__title fade">よくある質問</h2>
+
+  <div class="faq fade">
+    <div class="faq__item">
+      <button class="faq__q">曇りの日も着用すべきですか？</button>
+      <div class="faq__a">はい。雲は紫外線を約20%しか遮りません。曇天でも80%以上のUVが地表に届くため、天候に関わらず装着を推奨します。</div>
+    </div>
+    <div class="faq__item">
+      <button class="faq__q">普通のサングラスと何が違いますか？</button>
+      <div class="faq__a">ZŌEVΛのレンズはUV400規格を満たし、UV-A・UV-Bを99%以上カットします。さらに夕方の強いブルーライトも軽減し、日中の疲労と夜間の睡眠の質に影響します。</div>
+    </div>
+    <div class="faq__item">
+      <button class="faq__q">度付きレンズへの交換はできますか？</button>
+      <div class="faq__a">現在対応を検討中です。詳細はzoeva.jpのお問い合わせよりご連絡ください。</div>
+    </div>
+    <div class="faq__item">
+      <button class="faq__q">レンズのお手入れ方法は？</button>
+      <div class="faq__a">付属のマイクロファイバークロスで軽く拭いてください。アルコール・有機溶剤系のクリーナーはコーティングを傷めます。水洗いの場合は中性洗剤を少量使用し、柔らかい布で拭き取ってください。</div>
+    </div>
+  </div>
+</section>
+
+<div class="section__rule"></div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="cta__label fade">Next Step</p>
+  <h2 class="cta__title fade">回復をさらに深める。<br>次の一手。</h2>
+  <a href="https://zoeva.jp" class="cta__btn fade">SHOP ZŌEVΛ</a>
+
+  <p class="cta__next fade">スリープラインの製品も見る</p>
+  <a href="glass-guide.html" class="cta__next-link fade">Blue Light Recovery Glass Guide →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="logo.png" alt="ZŌEVΛ">
+  <p>Based on research by David Sinclair PhD (Harvard) · Peter Attia MD (Early Medical)<br>Matthew Walker PhD (UC Berkeley) · Roger Seheult MD (MedCram)<br><br>本製品は医療機器ではありません。</p>
+</footer>
+
+<script>
+// Fade in on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq__q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq__item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
